@@ -54,7 +54,7 @@ import workExperience from "../assets/data/work-experience.js";
         </div>
 
         <div class="profile-info__items">
-          <profile-info-item>
+          <profile-info-item class="profile-info__items_skills">
             <template #icon>
               <code-slash />
             </template>
@@ -67,11 +67,13 @@ import workExperience from "../assets/data/work-experience.js";
                   JavaScript (Electron, Vue js, JQuery, Quasar, Materialize,
                   Cordova, Capacitor, Ionic, Node Js)
                 </li>
+                <li>HTML</li>
+                <li>CSS</li>
               </ul>
             </template>
           </profile-info-item>
 
-          <profile-info-item>
+          <profile-info-item class="profile-info__items_jobs">
             <template #icon>
               <icon-bag />
             </template>
@@ -103,13 +105,13 @@ import workExperience from "../assets/data/work-experience.js";
             </template>
           </profile-info-item>
 
-          <profile-info-item>
+          <profile-info-item class="profile-info__items_education">
             <template #icon>
               <icon-school />
             </template>
             <template #title>Освіта</template>
             <template #content>
-              <div class="profile-info__experience">
+              <div class="profile-info__education">
                 <span>2015 – 2019 рр.</span>
                 <h3>НТУУ КПІ ім. І. Сікорського, Київ</h3>
                 <p>Ступінь освіти: бакалавр</p>
@@ -373,6 +375,22 @@ main {
       }
     }
 
+    &__items_skills > h3 {
+      fill: rgb(102, 212, 207);
+      color: rgb(102, 212, 207);
+    }
+
+    &__items_jobs > h3 {
+      fill: rgb(255, 159, 10);
+      color: rgb(255, 159, 10);
+    }
+
+    &__items_education > h3 {
+      fill: rgb(172, 142, 104);
+      color: rgb(172, 142, 104);
+    }
+
+    &__education,
     &__experience {
       display: flex;
       flex-direction: column;
@@ -434,6 +452,10 @@ main {
       max-width: 100%;
 
       margin-left: 0;
+
+      &:after {
+        display: none;
+      }
 
       &__info_links {
         flex-direction: column;
