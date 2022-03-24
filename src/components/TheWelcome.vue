@@ -4,29 +4,49 @@ import ProfileInfoItem from "./ProfileInfoItem.vue";
 import CodeSlash from "./icons/CodeSlash.vue";
 import IconBag from "./icons/Bag.vue";
 import IconSchool from "./icons/School.vue";
+import IconCall from "./icons/Call.vue";
+import IconMail from "./icons/Mail.vue";
 
 import workExperience from "../assets/data/work-experience.js";
-import { ref } from "vue";
-let value = ref(0);
 </script>
 
 <template>
   <div class="profile">
     <div class="profile-contacts">
-      <img src="@/assets/images/profile-photo.jpg" alt="" />
+      <div class="profile-contacts__card">
+        <img src="@/assets/images/profile-photo.jpg" alt="" />
 
-      <div style="z-index: 2">
-        <h2>Balkunov Nikita</h2>
-        <p>Full Stack Developer</p>
-        <p>24 years old</p>
-        <p>Kyiv</p>
+        <div class="profile-contacts__info">
+          <h2>Balkunov Nikita</h2>
+          <p>Software Engineer</p>
+          <p>24 years old</p>
+          <p>Kyiv, Ukraine</p>
 
-        <button @click="value++" style="z-index: 2">{{ value }}</button>
+          <p class="profile-contacts__info_links">
+            <a
+              class="profile-contacts__info_links_phone"
+              href="tel:+380500787871"
+            >
+              <icon-call />
+              +380 50 078 78 71
+            </a>
+            <a
+              class="profile-contacts__info_links_email"
+              href="mailto:balkunovn@gmail.com"
+            >
+              <icon-mail />
+              balkunovn@gmail.com
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <div class="profile-contacts__actions">
+        <button>Завантажити CV</button>
       </div>
     </div>
 
     <div class="profile-info">
-      <div class="profile-info__header"></div>
       <div class="scroll-wrapper">
         <div class="profile-info__header"></div>
         <div class="profile-info__title">
@@ -99,7 +119,6 @@ let value = ref(0);
           </profile-info-item>
         </div>
       </div>
-      <div class="profile-info__footer"></div>
     </div>
   </div>
 </template>
@@ -126,6 +145,10 @@ main {
   min-height: 90vh;
 
   &-contacts {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     max-width: 400px;
     width: 100%;
     border-radius: 4px;
@@ -169,8 +192,108 @@ main {
     img {
       clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 50% 100%, 0% 90%);
       width: 100%;
+      max-height: 54vh;
       height: 400px;
       object-fit: cover;
+    }
+
+    &__info,
+    &__actions {
+      z-index: 2;
+    }
+
+    &__info {
+      &_links {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        padding: 12px;
+
+        a {
+          display: inline-flex;
+          align-items: center;
+
+          text-decoration: none;
+          color: black;
+
+          transition: color 0.2s ease-in-out;
+
+          svg {
+            width: 18px;
+            height: 18px;
+            margin-right: 9px;
+
+            transition: transform 0.2s ease-in-out;
+          }
+        }
+
+        &_phone {
+          fill: rgb(52, 199, 89);
+
+          &:hover {
+            color: rgb(52, 199, 89);
+
+            svg {
+              transform: rotate(20deg) scale(1.1);
+            }
+          }
+        }
+
+        &_email {
+          fill: rgb(255, 149, 0);
+
+          &:hover {
+            color: rgb(255, 149, 0);
+
+            svg {
+              transform: scale(1.2);
+            }
+          }
+        }
+      }
+    }
+
+    &__actions {
+      &:before {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 1px;
+        background: radial-gradient(
+          ellipse at center,
+          #ddd 0%,
+          rgba(255, 255, 255, 0) 70%
+        );
+      }
+      a,
+      button {
+        display: block;
+
+        width: 100%;
+        height: 70px;
+
+        background: #fff;
+        color: #323232;
+
+        border: none;
+
+        font-size: 16px;
+        font-weight: 500;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+
+        cursor: pointer;
+
+        transition: color 0.2s ease-in-out;
+
+        &:hover {
+          color: #32ade6;
+        }
+      }
     }
   }
 
@@ -185,12 +308,11 @@ main {
     background-color: var(--nbp-card-color);
     border-radius: 4px;
 
-    padding-inline: 24px;
-
     overflow: hidden;
 
-    &__header,
-    &__footer {
+    &:before,
+    &:after {
+      content: "";
       position: absolute;
       height: 32px;
 
@@ -210,7 +332,7 @@ main {
       clip-path: ellipse(90% 100% at top);
     }
 
-    &__footer {
+    &:after {
       top: auto;
       bottom: 0;
       transform: rotate(180deg);
@@ -222,13 +344,16 @@ main {
       overflow-x: hidden;
       overflow-y: scroll;
 
-      margin-right: -24px;
-      padding-right: 24px;
       padding-top: 32px;
+      padding-inline: 24px;
     }
 
     &__title {
       padding-bottom: 12px;
+
+      & > * {
+        font-weight: 600 !important;
+      }
 
       &:after {
         content: "";
@@ -273,6 +398,51 @@ main {
       &:last-of-type {
         padding-bottom: 0;
       }
+    }
+  }
+}
+
+@media (max-width: 912px) {
+  body {
+    position: relative;
+    overflow: auto;
+  }
+
+  .profile {
+    flex-direction: column;
+    align-items: center;
+
+    max-width: 720px;
+
+    &-contacts {
+      max-width: 100%;
+
+      margin-left: 0;
+    }
+
+    &-info {
+      position: relative;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .profile {
+    margin: 0;
+
+    &-contacts {
+      max-width: 100%;
+
+      margin-left: 0;
+
+      &__info_links {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    &-info {
+      position: relative;
     }
   }
 }

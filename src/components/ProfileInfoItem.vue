@@ -20,7 +20,11 @@
   h3 {
     display: inline-flex;
     align-items: center;
+
     padding: 12px 0;
+
+    font-weight: 500;
+
     svg {
       max-height: 32px;
       max-width: 32px;
@@ -35,13 +39,6 @@
   &__content {
     display: flex;
     flex-direction: column;
-  }
-}
-
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
   }
 }
 </style>
