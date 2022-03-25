@@ -1,11 +1,32 @@
 :root {
   --nbp-background-color: #f2f2f7;
+  --nbp-background-color-rgb: 242, 242, 247;
+
+  --nbp-text-color: #000000;
 
   --nbp-card-color: #ffffff;
+
+  --nbp-light-color: #ffffff;
+  --nbp-light-color-rgb: 255, 255, 255;
+
+  --nbp-light-contracst-color: #000000;
+  --nbp-light-contrast-color-rgb: 0, 0, 0;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --nbp-background-color: #000000;
+    --nbp-background-color-rgb: 0, 0, 0;
 
+    --nbp-text-color: #ffffff;
+
+    --nbp-card-color: #1c1c1e;
+    --nbp-card-color-rgb: 28, 28, 30;
+
+    --nbp-light-color: #000000;
+    --nbp-light-color-rgb: 0, 0, 0;
+
+    --nbp-light-contracst-color: #ffffff;
+    --nbp-light-contrast-color-rgb: 255, 255, 255;
   }
 }

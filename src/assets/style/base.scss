@@ -11,7 +11,6 @@
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
   background: var(--nbp-background-color);
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
@@ -21,4 +20,6 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  color: var(--nbp-text-color);
 }

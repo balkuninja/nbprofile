@@ -8,6 +8,38 @@ import IconCall from "./icons/Call.vue";
 import IconMail from "./icons/Mail.vue";
 
 import workExperience from "../assets/data/work-experience.js";
+
+import { initializeApp } from "firebase/app";
+import { getStorage, ref as fRef, getDownloadURL } from "firebase/storage";
+import { ref } from "vue";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDbgiq3M74emLIfjNSTOOQz6JCkiZgqKxU",
+  authDomain: "nbprofile-a12f8.firebaseapp.com",
+  databaseURL:
+    "https://nbprofile-a12f8-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "nbprofile-a12f8",
+  storageBucket: "nbprofile-a12f8.appspot.com",
+  messagingSenderId: "863529157280",
+  appId: "1:863529157280:web:4d80d8f967055fd903bfc5",
+  measurementId: "G-4H67XQ0FC6",
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const storage = getStorage(firebaseApp);
+
+const downloadCVUrl = ref(false);
+
+const pathReference = fRef(
+  storage,
+  "gs://nbprofile-a12f8.appspot.com/%D0%A0%D0%B5%D0%B7%D1%8E%D0%BC%D0%B5 %D0%91%D0%B0%D0%BB%D0%BA%D1%83%D0%BD%D0%BE%D0%B2 %D0%9C%D0%B8%D0%BA%D0%B8%D1%82%D0%B0.pdf"
+);
+
+getDownloadURL(pathReference).then((dURL) => {
+  downloadCVUrl.value = dURL;
+});
+
+console.log(pathReference);
 </script>
 
 <template>
@@ -42,7 +74,7 @@ import workExperience from "../assets/data/work-experience.js";
       </div>
 
       <div class="profile-contacts__actions">
-        <button>Завантажити CV</button>
+        <a :href="downloadCVUrl">Завантажити CV</a>
       </div>
     </div>
 
@@ -216,7 +248,7 @@ main {
           align-items: center;
 
           text-decoration: none;
-          color: black;
+          color: var(--nbp-text-color);
 
           transition: color 0.2s ease-in-out;
 
@@ -267,7 +299,7 @@ main {
         background: radial-gradient(
           ellipse at center,
           #ddd 0%,
-          rgba(255, 255, 255, 0) 70%
+          rgba(var(--nbp-card-color-rgb), 0) 70%
         );
       }
       a,
@@ -277,8 +309,8 @@ main {
         width: 100%;
         height: 70px;
 
-        background: #fff;
-        color: #323232;
+        background: var(--nbp-card-color);
+        color: var(--nbp-text-color);
 
         border: none;
 
@@ -327,8 +359,8 @@ main {
 
       background: linear-gradient(
         0deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgb(255, 255, 255, 0.9) 100%
+        rgba(var(--nbp-card-color-rgb), 0) 0%,
+        rgb(var(--nbp-card-color-rgb), 0.9) 100%
       );
 
       clip-path: ellipse(90% 100% at top);
