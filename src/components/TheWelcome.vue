@@ -32,7 +32,7 @@ const downloadCVUrl = ref(false);
 
 const pathReference = fRef(
   storage,
-  "gs://nbprofile-a12f8.appspot.com/%D0%A0%D0%B5%D0%B7%D1%8E%D0%BC%D0%B5 %D0%91%D0%B0%D0%BB%D0%BA%D1%83%D0%BD%D0%BE%D0%B2 %D0%9C%D0%B8%D0%BA%D0%B8%D1%82%D0%B0.pdf"
+  "gs://nbprofile-a12f8.appspot.com/Резюме Балкунов Микита.pdf"
 );
 
 getDownloadURL(pathReference).then((dURL) => {
@@ -308,6 +308,7 @@ main {
 
         width: 100%;
         height: 70px;
+        line-height: 70px;
 
         background: var(--nbp-card-color);
         color: var(--nbp-text-color);
