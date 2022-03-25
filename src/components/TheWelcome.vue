@@ -1,4 +1,6 @@
 <script setup>
+import { ref, onBeforeMount } from "vue";
+
 import ProfileInfoItem from "./ProfileInfoItem.vue";
 
 import CodeSlash from "./icons/CodeSlash.vue";
@@ -9,44 +11,26 @@ import IconMail from "./icons/Mail.vue";
 
 import workExperience from "../assets/data/work-experience.js";
 
-import { initializeApp } from "firebase/app";
-import { getStorage, ref as fRef, getDownloadURL } from "firebase/storage";
-import { ref } from "vue";
+import { getCVUrl } from "../services/CV.js";
+// import { getProfilePhotoURL } from "@/services/profile";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDbgiq3M74emLIfjNSTOOQz6JCkiZgqKxU",
-  authDomain: "nbprofile-a12f8.firebaseapp.com",
-  databaseURL:
-    "https://nbprofile-a12f8-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "nbprofile-a12f8",
-  storageBucket: "nbprofile-a12f8.appspot.com",
-  messagingSenderId: "863529157280",
-  appId: "1:863529157280:web:4d80d8f967055fd903bfc5",
-  measurementId: "G-4H67XQ0FC6",
-};
+const downloadCVUrl = ref("");
+// const profilePhotoURL = ref(
+//   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+// );
 
-const firebaseApp = initializeApp(firebaseConfig);
-const storage = getStorage(firebaseApp);
+onBeforeMount(() => {
+  getCVUrl().then((url) => (downloadCVUrl.value = url));
 
-const downloadCVUrl = ref(false);
-
-const pathReference = fRef(
-  storage,
-  "gs://nbprofile-a12f8.appspot.com/Резюме Балкунов Микита.pdf"
-);
-
-getDownloadURL(pathReference).then((dURL) => {
-  downloadCVUrl.value = dURL;
+  // getProfilePhotoURL().then((url) => (profilePhotoURL.value = url));
 });
-
-console.log(pathReference);
 </script>
 
 <template>
   <div class="profile">
     <div class="profile-contacts">
       <div class="profile-contacts__card">
-        <img src="@/assets/images/profile-photo.jpg" alt="" />
+        <img src="../assets/images/profile-photo.jpg" alt="" />
 
         <div class="profile-contacts__info">
           <h2>Balkunov Nikita</h2>
