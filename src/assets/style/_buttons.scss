@@ -1,0 +1,23 @@
+.btn,
+.btn-clear {
+  display: block;
+  border: none;
+  background: transparent;
+  color: var(--nbp-text-color);
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.btn {
+  height: 70px;
+  line-height: 70px;
+  font-size: 1.08em;
+  font-weight: 500;
+  text-transform: uppercase;
+
+  &:hover {
+    color: var(--nbp-cyan-color);
+  }
+}

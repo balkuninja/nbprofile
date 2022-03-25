@@ -1,0 +1,34 @@
+.text-cyan {
+  &, &-hover:hover {
+    fill: var(--nbp-cyan-color);
+    color: var(--nbp-cyan-color);
+  }
+}
+
+.text-green {
+  &, &-hover:hover {
+    fill: var(--nbp-green-color);
+    color: var(--nbp-green-color);
+  }
+}
+
+.text-orange {
+  &, &-hover:hover {
+    fill: var(--nbp-orange-color);
+    color: var(--nbp-orange-color);
+  }
+}
+
+.text-mint {
+  &, &-hover:hover {
+    fill: var(--nbp-mint-color);
+    color: var(--nbp-mint-color);
+  }
+}
+
+.text-brown {
+  &, &-hover:hover {
+    fill: var(--nbp-brown-color);
+    color: var(--nbp-brown-color);
+  }
+}

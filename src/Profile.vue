@@ -6,12 +6,15 @@ import ProfileInfoItem from "./components/ProfileInfoItem.vue";
 import CodeSlash from "./components/icons/CodeSlash.vue";
 import IconBag from "./components/icons/Bag.vue";
 import IconSchool from "./components/icons/School.vue";
-import IconCall from "./components/icons/Call.vue";
-import IconMail from "./components/icons/Mail.vue";
+
+import profile from "./assets/data/profile.js";
 
 import workExperience from "./assets/data/work-experience.js";
+import skills from "./assets/data/skills.js";
+import education from "./assets/data/education.js";
 
 import { getCVUrl } from "./services/CV.js";
+import SocialLink from "./components/SocialLink.vue";
 
 const downloadCVUrl = ref("");
 
@@ -21,45 +24,35 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <main>
-    <div class="profile container">
-      <div class="profile-contacts">
+  <main class="profile">
+    <div class="container">
+      <section class="profile-contacts">
         <div class="profile-contacts__card">
-          <img src="./assets/images/profile-photo.jpg" alt="" />
+          <img src="./assets/images/profile-photo.jpg" alt="Моя світлина" />
 
           <div class="profile-contacts__info">
-            <h2>Balkunov Nikita</h2>
-            <p>Software Engineer</p>
-            <p>24 years old</p>
-            <p>Kyiv, Ukraine</p>
+            <h2>{{ profile.name }}</h2>
+            <p>{{ profile.position }}</p>
+            <p>{{ profile.age }}</p>
+            <p>{{ profile.residence }}</p>
 
-            <p class="profile-contacts__info_links">
-              <a
-                class="profile-contacts__info_links_phone"
-                href="tel:+380500787871"
-              >
-                <icon-call />
-                +380 50 078 78 71
-              </a>
-              <a
-                class="profile-contacts__info_links_email"
-                href="mailto:balkunovn@gmail.com"
-              >
-                <icon-mail />
-                balkunovn@gmail.com
-              </a>
-            </p>
+            <div class="profile-contacts__info_links">
+              <social-link
+                v-for="(link, lIdx) in profile.links"
+                :key="`profile-links-${lIdx}`"
+                v-bind="link"
+              />
+            </div>
           </div>
         </div>
 
         <div class="profile-contacts__actions">
-          <a :href="downloadCVUrl">Завантажити CV</a>
+          <a class="btn" :href="downloadCVUrl">Завантажити CV</a>
         </div>
-      </div>
+      </section>
 
-      <div class="profile-info">
+      <section class="profile-info">
         <div class="scroll-wrapper">
-          <div class="profile-info__header"></div>
           <div class="profile-info__title">
             <h2>Резюме</h2>
           </div>
@@ -67,28 +60,32 @@ onBeforeMount(async () => {
           <div class="profile-info__items">
             <profile-info-item class="profile-info__items_skills">
               <template #icon>
-                <code-slash />
+                <code-slash class="text-mint" />
               </template>
-              <template #title>Навички</template>
+              <template #title>
+                <span class="text-mint">Навички</span>
+              </template>
+
               <template #content>
                 <ul>
-                  <li>PHP</li>
-                  <li>SQL (MySQL)</li>
-                  <li>
-                    JavaScript (Electron, Vue js, JQuery, Quasar, Materialize,
-                    Cordova, Capacitor, Ionic, Node Js)
-                  </li>
-                  <li>HTML</li>
-                  <li>CSS</li>
+                  <li
+                    v-for="(skill, sIdx) in skills"
+                    :key="`profile-skills-${sIdx}`"
+                    v-text="skill"
+                  />
                 </ul>
               </template>
             </profile-info-item>
 
             <profile-info-item class="profile-info__items_jobs">
               <template #icon>
-                <icon-bag />
+                <icon-bag class="text-orange" />
               </template>
-              <template #title>Досвід роботи</template>
+
+              <template #title>
+                <span class="text-orange">Досвід роботи</span>
+              </template>
+
               <template #content>
                 <div
                   class="profile-info__experience"
@@ -96,20 +93,19 @@ onBeforeMount(async () => {
                   :key="`work-experience-${expIdx}`"
                 >
                   <span>{{ exp.period }}</span>
+
                   <h3>
-                    {{ exp.name }} – <span> {{ exp.position }}</span>
+                    {{ exp.name }} – <span>{{ exp.position }}</span>
                   </h3>
-                  <template
-                    v-if="exp.achievement && exp.achievement.length !== 0"
-                  >
+
+                  <template v-if="exp.achievement && exp.achievement.length !== 0">
                     <p>Досягнення:</p>
                     <ul>
                       <li
                         v-for="(achievement, achIdx) in exp.achievement"
                         :key="`work-experience-achievement-${achIdx}`"
-                      >
-                        {{ achievement }}
-                      </li>
+                        v-text="achievement"
+                      />
                     </ul>
                   </template>
                 </div>
@@ -118,27 +114,35 @@ onBeforeMount(async () => {
 
             <profile-info-item class="profile-info__items_education">
               <template #icon>
-                <icon-school />
+                <icon-school class="text-brown" />
               </template>
-              <template #title>Освіта</template>
+
+              <template #title>
+                <span class="text-brown">Освіта</span>
+              </template>
+
               <template #content>
                 <div class="profile-info__education">
-                  <span>2015 – 2019 рр.</span>
-                  <h3>НТУУ КПІ ім. І. Сікорського, Київ</h3>
-                  <p>Ступінь освіти: бакалавр</p>
-                  <p>Напрям підготовки: телекомунікації</p>
+                  <span>{{ education.period }}</span>
+                  <h3>{{ education.name }}</h3>
+                  <p>Ступінь освіти: {{ education.degree }}</p>
+                  <p>Напрям підготовки: {{ education.faculty }}</p>
                 </div>
               </template>
             </profile-info-item>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   </main>
 </template>
 
 <style lang="scss">
 .profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   &-contacts {
     display: flex;
     flex-direction: column;
@@ -176,6 +180,10 @@ onBeforeMount(async () => {
         rgba(242, 242, 247, 0.01) 100%
       );
       z-index: -1;
+
+      @media (max-width: $nbp-mobile-breakpoint) {
+        display: none;
+      }
     }
 
     img {
@@ -191,91 +199,37 @@ onBeforeMount(async () => {
       z-index: 2;
     }
 
-    &__info {
-      &_links {
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        padding: 12px;
+    &__info_links {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding: 12px;
 
-        a {
-          display: inline-flex;
-          align-items: center;
-          text-decoration: none;
-          color: var(--nbp-text-color);
-          transition: color 0.2s ease-in-out;
-
-          svg {
-            width: 18px;
-            height: 18px;
-            margin-right: 9px;
-            transition: transform 0.2s ease-in-out;
-          }
-        }
-
-        &_phone {
-          fill: rgb(52, 199, 89);
-
-          &:hover {
-            color: rgb(52, 199, 89);
-
-            svg {
-              transform: rotate(20deg) scale(1.1);
-            }
-          }
-        }
-
-        &_email {
-          fill: rgb(255, 149, 0);
-
-          &:hover {
-            color: rgb(255, 149, 0);
-
-            svg {
-              transform: scale(1.2);
-            }
-          }
-        }
+      @media (max-width: $nbp-mobile-breakpoint) {
+        flex-direction: column;
+        align-items: center;
       }
     }
 
-    &__actions {
-      &:before {
-        content: "";
-        position: absolute;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 1px;
-        background: radial-gradient(
-          ellipse at center,
-          #ddd 0%,
-          rgba(255, 255, 255, 0) 70%
-        );
-      }
+    &__actions:before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 1px;
+      background: radial-gradient(ellipse at center, #ddd 0%, rgba(255, 255, 255, 0) 70%);
+    }
 
-      a,
-      button {
-        display: block;
-        width: 100%;
-        height: 70px;
-        line-height: 70px;
-        border: none;
-        background: var(--nbp-card-color);
-        color: var(--nbp-text-color);
-        font-size: 16px;
-        font-weight: 500;
-        text-align: center;
-        text-decoration: none;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: color 0.2s ease-in-out;
+    @media (max-width: $nbp-tablet-breakpoint) {
+      max-width: 100%;
+      margin-left: 0;
+    }
 
-        &:hover {
-          color: #32ade6;
-        }
-      }
+    @media (max-width: $nbp-mobile-breakpoint) {
+      max-width: 100%;
+      margin-left: 0;
     }
   }
 
@@ -336,27 +290,8 @@ onBeforeMount(async () => {
         bottom: 0;
         left: -24px;
         right: -24px;
-        background: radial-gradient(
-          ellipse at left,
-          #ddd 0%,
-          rgba(255, 255, 255, 0) 80%
-        );
+        background: radial-gradient(ellipse at left, #ddd 0%, rgba(255, 255, 255, 0) 80%);
       }
-    }
-
-    &__items_skills > h3 {
-      fill: rgb(102, 212, 207);
-      color: rgb(102, 212, 207);
-    }
-
-    &__items_jobs > h3 {
-      fill: rgb(255, 159, 10);
-      color: rgb(255, 159, 10);
-    }
-
-    &__items_education > h3 {
-      fill: rgb(172, 142, 104);
-      color: rgb(172, 142, 104);
     }
 
     &__education,
@@ -386,39 +321,8 @@ onBeforeMount(async () => {
         padding-bottom: 0;
       }
     }
-  }
-}
 
-@media (max-width: $nbp-tablet-breakpoint) {
-  .profile {
-    &-contacts {
-      max-width: 100%;
-      margin-left: 0;
-    }
-
-    &-info {
-      position: relative;
-    }
-  }
-}
-
-@media (max-width: $nbp-mobile-breakpoint) {
-  .profile {
-    &-contacts {
-      max-width: 100%;
-      margin-left: 0;
-
-      &:after {
-        display: none;
-      }
-
-      &__info_links {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-
-    &-info {
+    @media (max-width: $nbp-tablet-breakpoint) {
       position: relative;
     }
   }
