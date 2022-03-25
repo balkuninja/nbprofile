@@ -1,5 +1,3 @@
-@import "./variables";
-
 *,
 *::before,
 *::after {
@@ -10,16 +8,32 @@
 }
 
 body {
+  position: fixed;
   min-height: 100vh;
+  inset: 0;
   background: var(--nbp-background-color);
-  transition: color 0.5s, background-color 0.5s;
+  color: var(--nbp-text-color);
+
   line-height: 1.6;
   font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  color: var(--nbp-text-color);
+  transition: color 0.5s, background-color 0.5s, fill 0.5s;
+  overflow: hidden;
+
+  @media (max-width: $nbp-tablet-breakpoint) {
+    position: relative;
+    overflow: auto;
+  }
+
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

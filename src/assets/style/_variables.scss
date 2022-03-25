@@ -1,3 +1,6 @@
+$nbp-tablet-breakpoint: 912px;
+$nbp-mobile-breakpoint: 576px;
+
 :root {
   --nbp-background-color: #f2f2f7;
   --nbp-background-color-rgb: 242, 242, 247;
@@ -5,6 +8,7 @@
   --nbp-text-color: #000000;
 
   --nbp-card-color: #ffffff;
+  --nbp-card-color-rgb: 255, 255, 255;
 
   --nbp-light-color: #ffffff;
   --nbp-light-color-rgb: 255, 255, 255;
