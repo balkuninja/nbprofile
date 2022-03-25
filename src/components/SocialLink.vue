@@ -49,7 +49,7 @@ const phoneInfo = computed(() => {
 </script>
 
 <template>
-  <a class="social-link" :class="phoneInfo.class" href="tel:+380500787871">
+  <a class="social-link" :class="phoneInfo.class" :href="phoneInfo.link">
     <component :class="phoneInfo.iconClass" :is="phoneInfo.icon" />
     {{ phoneInfo.text }}
   </a>
