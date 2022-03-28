@@ -28,7 +28,7 @@ onBeforeMount(async () => {
     <div class="container">
       <section class="profile-contacts">
         <div class="profile-contacts__card">
-          <img src="./assets/images/profile-photo.jpg" alt="Моя світлина" />
+          <img src="./assets/images/profile-photo.jpeg" alt="Моя світлина" />
 
           <div class="profile-contacts__info">
             <h2>{{ profile.name }}</h2>
