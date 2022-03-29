@@ -46,3 +46,12 @@ $nbp-mobile-breakpoint: 576px;
     --nbp-brown-color: #ac8e68;
   }
 }
+
+:root {
+  --nbp-offset-x: 32px;
+  --nbp-offset-y: 12px;
+
+  @media(max-width: $nbp-tablet-breakpoint) {
+    --nbp-offset-x: 18px;
+  }
+}

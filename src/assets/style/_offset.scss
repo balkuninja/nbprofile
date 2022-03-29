@@ -1,0 +1,19 @@
+.pa-x {
+  padding-inline: var(--nbp-offset-x);
+}
+
+.pa-y {
+  padding-top: var(--nbp-offset-y);
+  padding-bottom: var(--nbp-offset-y);
+}
+
+.m-x {
+  margin-top: var(--nbp-offset-x);
+  margin-bottom: var(--nbp-offset-x);
+
+}
+
+.m-y {
+  padding-left: var(--nbp-offset-y);
+  padding-right: var(--nbp-offset-y);
+}

@@ -1,3 +1,7 @@
+.bg-card {
+  background-color: var(--nbp-card-color);
+}
+
 .text-cyan {
   &, &-hover:hover {
     fill: var(--nbp-cyan-color);
