@@ -163,7 +163,7 @@ onBeforeMount(async () => {
 
   &__links {
     padding: 12px;
-    column-gap: 12px;
+    column-gap: 16px;
   }
 
   &__actions:before {
