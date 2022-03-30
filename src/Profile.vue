@@ -31,7 +31,7 @@ onBeforeMount(async () => {
       <section class="profile-contacts">
         <div class="flex column full-height text-center bg-card shadow">
           <div class="grow-full">
-            <img src="./assets/images/profile-photo.jpeg" alt="Моя світлина" />
+            <img src="./assets/images/profile-photo.webp" alt="Моя світлина" />
 
             <h2>{{ profile.name }}</h2>
             <p>{{ profile.position }}</p>

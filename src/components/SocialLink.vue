@@ -63,6 +63,10 @@ const phoneInfo = computed(() => {
   color: var(--nbp-text-color);
   transition: color 0.2s ease-in-out;
 
+  @media (max-width: $nbp-tablet-breakpoint) {
+    line-height: 42px;
+  }
+
   svg {
     width: 18px;
     height: 18px;
