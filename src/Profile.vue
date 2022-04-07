@@ -102,9 +102,7 @@ onBeforeMount(async () => {
           </info-item>
 
           <info-item>
-            <info-item-header class="text-brown" :icon="IconSchool">
-              Досвід роботи
-            </info-item-header>
+            <info-item-header class="text-brown" :icon="IconSchool">Освіта</info-item-header>
 
             <info-item-content>
               <span>{{ education.period }}</span>
