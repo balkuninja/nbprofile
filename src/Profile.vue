@@ -55,7 +55,7 @@ onBeforeMount(async () => {
           </div>
 
           <div class="profile-contacts__actions">
-            <a class="btn" :href="downloadCVUrl" tabindex="1" role="link">Завантажити CV</a>
+            <a class="btn" :href="downloadCVUrl" tabindex="0" role="link">Завантажити CV</a>
           </div>
         </div>
       </section>

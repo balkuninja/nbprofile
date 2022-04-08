@@ -9,14 +9,20 @@ import { computed } from "vue";
 const props = defineProps({
   type: { type: String, required: true },
   value: { type: String, required: true },
+  withContent: { type: Boolean, default: true },
 });
+
+const linkDataNormalizer = ({ link, text, icon, target, classList, iconClass }) => {
+  return { link, text, icon, target, classList, iconClass };
+};
 
 const makePhoneLink = (phone) => {
   return {
     link: `tel:${phone.replace(/ /g, "")}`,
     text: phone,
     icon: IconCall,
-    class: "phone text-green-all-state",
+    target: "_self",
+    classList: "phone text-green-all-state",
     iconClass: "text-green",
   };
 };
@@ -26,7 +32,8 @@ const makeEmailLink = (email) => {
     link: `mailto:${email}`,
     text: email,
     icon: IconMail,
-    class: "email text-orange-all-state",
+    target: "_self",
+    classList: "email text-orange-all-state",
     iconClass: "text-orange",
   };
 };
@@ -36,7 +43,8 @@ const makeLinkedinLink = (link) => {
     link,
     text: "",
     icon: LogoLinkedin,
-    class: "linkedin text-blue-all-state",
+    target: "_blank",
+    classList: "linkedin text-blue-all-state",
     iconClass: "text-blue",
   };
 };
@@ -46,7 +54,8 @@ const makeTelegramLink = (link) => {
     link,
     text: "",
     icon: LogoTelegram,
-    class: "telegram text-cyan-all-state",
+    target: "_blank",
+    classList: "telegram text-cyan-all-state",
     iconClass: "text-cyan",
   };
 };
@@ -64,25 +73,23 @@ const makeLinkInfo = (type, value) => {
     throw new Error("Type not allowed");
   }
 
-  return maker(value);
+  return linkDataNormalizer(maker(value));
 };
 
-const phoneInfo = computed(() => {
-  return makeLinkInfo(props.type, props.value);
-});
+const linkData = computed(() => makeLinkInfo(props.type, props.value));
 </script>
 
 <template>
   <a
     class="social-link"
-    :class="phoneInfo.class"
-    :href="phoneInfo.link"
-    target="_blank"
+    :class="linkData.classList"
+    :href="linkData.link"
+    :target="linkData.target"
     role="link"
     tabindex="0"
   >
-    <component :class="phoneInfo.iconClass" :is="phoneInfo.icon" />
-    {{ phoneInfo.text }}
+    <component :class="linkData.iconClass" :is="linkData.icon" />
+    {{ linkData.text }}
   </a>
 </template>
 
