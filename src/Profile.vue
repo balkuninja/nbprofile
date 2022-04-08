@@ -29,7 +29,7 @@ onBeforeMount(async () => {
   <main class="page">
     <div class="container">
       <section class="profile-contacts">
-        <div class="flex column full-height text-center bg-card shadow">
+        <div class="flex column full-height text-center shadow">
           <div class="grow-full">
             <img src="./assets/images/profile-photo.webp" alt="Моя світлина" />
 
@@ -40,6 +40,13 @@ onBeforeMount(async () => {
 
             <div class="profile-contacts__links flex justify-around">
               <social-link
+                v-for="(link, lIdx) in profile.contacts"
+                :key="`profile-links-${lIdx}`"
+                v-bind="link"
+              />
+            </div>
+            <div class="flex justify-center">
+              <social-link
                 v-for="(link, lIdx) in profile.links"
                 :key="`profile-links-${lIdx}`"
                 v-bind="link"
@@ -48,14 +55,14 @@ onBeforeMount(async () => {
           </div>
 
           <div class="profile-contacts__actions">
-            <a class="btn" :href="downloadCVUrl">Завантажити CV</a>
+            <a class="btn" :href="downloadCVUrl" tabindex="1" role="link">Завантажити CV</a>
           </div>
         </div>
       </section>
 
       <section class="profile-info">
         <div class="scroll-container pa-x">
-          <header class="profile-info__header">
+          <header class="profile-info__header" role="banner">
             <h1>Резюме</h1>
           </header>
 
@@ -133,6 +140,10 @@ onBeforeMount(async () => {
   @media (max-width: $nbp-mobile-breakpoint) {
     max-width: 100%;
     margin-left: 0;
+  }
+
+  & > div {
+    background-color: var(--nbp-card-color);
   }
 
   &:after {

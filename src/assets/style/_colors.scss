@@ -1,38 +1,21 @@
-.bg-card {
-  background-color: var(--nbp-card-color);
-}
+@mixin make-color-classes($name, $color) {
+  .text-#{$name} {
+    &, &-hover:hover, &-all-state:focus, &-all-state:hover {
+      fill: $color;
+      color: $color;
+    }
+  }
 
-.text-cyan {
-  &, &-hover:hover {
-    fill: var(--nbp-cyan-color);
-    color: var(--nbp-cyan-color);
+  .bg-#{$name} {
+    &, &-hover:hover, &-all-state:focus, &-all-state:hover {
+      background-color: $color;
+    }
   }
 }
 
-.text-green {
-  &, &-hover:hover {
-    fill: var(--nbp-green-color);
-    color: var(--nbp-green-color);
-  }
-}
-
-.text-orange {
-  &, &-hover:hover {
-    fill: var(--nbp-orange-color);
-    color: var(--nbp-orange-color);
-  }
-}
-
-.text-mint {
-  &, &-hover:hover {
-    fill: var(--nbp-mint-color);
-    color: var(--nbp-mint-color);
-  }
-}
-
-.text-brown {
-  &, &-hover:hover {
-    fill: var(--nbp-brown-color);
-    color: var(--nbp-brown-color);
-  }
-}
+@include make-color-classes("blue", var(--nbp-blue-color));
+@include make-color-classes("cyan", var(--nbp-cyan-color));
+@include make-color-classes("green", var(--nbp-green-color));
+@include make-color-classes("orange", var(--nbp-orange-color));
+@include make-color-classes("mint", var(--nbp-mint-color));
+@include make-color-classes("brown", var(--nbp-brown-color));
