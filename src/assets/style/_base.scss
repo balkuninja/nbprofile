@@ -32,3 +32,7 @@ body {
     overflow: auto;
   }
 }
+
+*:not(:focus-visible) {
+  outline: none !important;
+}
